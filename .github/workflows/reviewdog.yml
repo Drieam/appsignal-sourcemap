@@ -1,0 +1,29 @@
+name: reviewdog
+on: push
+jobs:
+  rubocop:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby:
+          - 2.7
+          - 3.0
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
+
+      - name: Run linters with Reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: reviewdog -fail-on-error -tee -reporter=github-check

@@ -3,7 +3,7 @@
 module Appsignal
   module Sourcemap
     class Uploader
-      UPLOAD_URI = URI('https://appsignal.com/api/sourcemaps')
+      UPLOAD_URI = URI("https://appsignal.com/api/sourcemaps")
 
       def self.upload(sourcemap_path)
         new(sourcemap_path).upload
@@ -42,18 +42,18 @@ module Appsignal
 
       def request
         Net::HTTP::Post.new(UPLOAD_URI).tap do |request|
-          request.set_form request_form_data, 'multipart/form-data'
+          request.set_form request_form_data, "multipart/form-data"
         end
       end
 
       def request_form_data
         [
-          ['push_api_key', Appsignal.config[:push_api_key]],
-          ['app_name', Appsignal.config[:name]],
-          ['revision', Appsignal.config[:revision]],
-          ['environment', Appsignal.config.env],
-          ['name[]', source_url],
-          ['file', sourcemap_content]
+          ["push_api_key", Appsignal.config[:push_api_key]],
+          ["app_name", Appsignal.config[:name]],
+          ["revision", Appsignal.config[:revision]],
+          ["environment", Appsignal.config.env],
+          ["name[]", source_url],
+          ["file", sourcemap_content]
         ]
       end
 
@@ -66,7 +66,7 @@ module Appsignal
       end
 
       def js_path
-        @sourcemap_path.delete_suffix('.map')
+        @sourcemap_path.delete_suffix(".map")
       end
 
       def asset_host

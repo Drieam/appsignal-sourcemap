@@ -23,7 +23,7 @@ jobs:
           printf -- "---\n:github: Bearer ${{ secrets.GITHUB_TOKEN }}\n" > $HOME/.gem/credentials
 
       - name: Replace version by tag value
-        run: sed -i "s/'[0-9]\.[0-9]\..*'/'${GITHUB_REF##*/}'/" lib/appsignal/sourcemap/version.rb
+        run: sed -i "s/\"[0-9]\.[0-9]\..*\"/\"${GITHUB_REF##*/}\"/" lib/appsignal/sourcemap/version.rb
 
       - name: Build and Publish gem to GitHub Package Registry
         run: |
