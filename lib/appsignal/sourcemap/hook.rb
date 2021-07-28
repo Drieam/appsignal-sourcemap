@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'appsignal/hooks'
+
 module Appsignal
   module Sourcemap
     class SourcemapHook < Appsignal::Hooks::Hook
