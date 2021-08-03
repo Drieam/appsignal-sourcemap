@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*", "README.md"]
 
   spec.add_dependency "appsignal", "~> 3.0"
+  spec.add_dependency "parallel", "~> 1.0"
 
   spec.add_development_dependency "standard"
 end
