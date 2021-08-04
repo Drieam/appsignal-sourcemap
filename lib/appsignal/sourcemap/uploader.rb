@@ -42,6 +42,8 @@ module Appsignal
 
       def request
         Net::HTTP::Post.new(UPLOAD_URI).tap do |request|
+          # request.ssl_version = :TLSv1 and http.ciphers = ['RC4-SHA']
+
           request.set_form request_form_data, "multipart/form-data"
         end
       end
