@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+require "parallel"
 require "appsignal/sourcemap/uploader"
 
 module Appsignal
   module Sourcemap
     class Supervisor
+      PARALLEL_THREADS = 10
+
       def self.start
         new.start
       end
@@ -14,11 +17,9 @@ module Appsignal
 
         Appsignal.logger.info("Starting sourcemaps upload")
 
-        source_map_paths.map do |source_map_path|
-          Thread.new do
-            Uploader.upload(source_map_path)
-          end
-        end.each(&:join)
+        Parallel.each(source_map_paths, in_threads: PARALLEL_THREADS) do |source_map_path|
+          Uploader.upload(source_map_path)
+        end
 
         Appsignal.logger.info("Finished sourcemaps upload")
       end

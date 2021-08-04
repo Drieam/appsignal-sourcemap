@@ -3,6 +3,7 @@ PATH
   specs:
     appsignal-sourcemap (1.0.0.develop)
       appsignal (~> 3.0)
+      parallel (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
