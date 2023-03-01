@@ -9,8 +9,8 @@ require "appsignal/sourcemap/version"
 Gem::Specification.new do |spec|
   spec.name = "appsignal-sourcemap"
   spec.version = Appsignal::Sourcemap::VERSION
-  spec.authors = ["Stef Schenkelaars"]
-  spec.email = ["stef.schenkelaars@gmail.com"]
+  spec.authors = ["Drieam"]
+  spec.email = ["dev@drieam.com"]
   spec.homepage = "https://github.com/drieam/appsignal-sourcemap"
   spec.summary = "Upload private sourcemaps to appsignal"
 
