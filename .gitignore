@@ -1,0 +1,2 @@
+# Ignore Gemfile.lock for ruby gems
+Gemfile.lock
