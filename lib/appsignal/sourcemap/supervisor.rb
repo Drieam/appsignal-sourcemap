@@ -15,27 +15,25 @@ module Appsignal
       def start
         return if invalid_preconditions
 
-        Appsignal.logger.info("Starting sourcemaps upload")
+        Rails.logger.info("Starting sourcemaps upload")
 
         Parallel.each(source_map_paths, in_threads: PARALLEL_THREADS) do |source_map_path|
           Uploader.upload(source_map_path)
         end
 
-        Appsignal.logger.info("Finished sourcemaps upload")
+        Rails.logger.info("Finished sourcemaps upload")
       end
 
       private
 
       def invalid_preconditions
         unless Appsignal.config.valid?
-          return Appsignal.logger.error("Skipping sourcemaps upload since Appsignal config is invalid")
+          return Rails.logger.error("Skipping sourcemaps upload since Appsignal config is invalid")
         end
         if asset_host.blank?
-          return Appsignal.logger.error("Skipping sourcemaps upload since Rails asset_host is not set")
+          return Rails.logger.error("Skipping sourcemaps upload since Rails asset_host is not set")
         end
-        if source_map_paths.empty?
-          return Appsignal.logger.info("Skipping sourcemaps upload since no javascript maps are found")
-        end
+        return Rails.logger.info("Skipping sourcemaps upload since no javascript maps are found") if source_map_paths.empty?
 
         false
       end

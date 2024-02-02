@@ -13,24 +13,22 @@ module Appsignal
         @sourcemap_path = sourcemap_path
       end
 
-      def upload # rubocop:disable Metrics/AbcSize
-        Appsignal.logger.debug "Starting sourcemap upload '#{@sourcemap_path}' with parameters: #{request_form_data}"
+      def upload
+        Rails.logger.debug("Starting sourcemap upload '#{@sourcemap_path}' with parameters: #{request_form_data}")
 
         response = Net::HTTP.start(UPLOAD_URI.hostname, UPLOAD_URI.port, use_ssl: true) do |http|
           http.request(request)
         end
 
         if response.is_a?(Net::HTTPSuccess)
-          Appsignal.logger.debug("Finished sourcemap upload '#{@sourcemap_path}'")
+          Rails.logger.debug("Finished sourcemap upload '#{@sourcemap_path}'")
           File.delete(sourcemap_full_path)
           return
         end
 
-        Appsignal.logger.error <<~MESSAGE
+        Rails.logger.error <<~MESSAGE
           Uploading sourcemap #{@sourcemap_path} failed with message '#{response.message}'.
-
             Response: #{response.body}
-
         MESSAGE
       end
 
