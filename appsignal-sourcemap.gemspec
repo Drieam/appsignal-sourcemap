@@ -16,12 +16,14 @@ Gem::Specification.new do |spec|
 
   spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/Drieam"
 
-  spec.required_ruby_version = ">= 2.7"
+  spec.required_ruby_version = ">= 3.1"
 
   spec.files = Dir["lib/**/*", "README.md"]
 
+  spec.add_dependency "rails", ">= 6.1", "< 8.0"
   spec.add_dependency "appsignal", "~> 3.0"
   spec.add_dependency "parallel", "~> 1.0"
 
   spec.add_development_dependency "standard"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
