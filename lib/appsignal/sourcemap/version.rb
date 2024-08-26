@@ -2,6 +2,6 @@
 
 module Appsignal
   module Sourcemap
-    VERSION = "1.1.1.develop"
+    VERSION = "1.2.1.develop"
   end
 end
