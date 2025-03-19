@@ -1,4 +1,0 @@
----
-runner:
-  standardrb:
-    cmd: bundle exec standardrb
