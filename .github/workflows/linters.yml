@@ -1,7 +1,7 @@
-name: reviewdog
+name: linters
 on: push
 jobs:
-  rubocop:
+  standardrb:
     strategy:
       fail-fast: false
       matrix:
@@ -22,10 +22,5 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Setup reviewdog
-        uses: reviewdog/action-setup@v1
-
-      - name: Run linters with Reviewdog
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: reviewdog -fail-on-error -tee -reporter=github-check
+      - name: Run standardrb
+        run: bundle exec standardrb
