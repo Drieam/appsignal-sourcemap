@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -31,3 +31,26 @@ jobs:
           gem push --verbose --key github --host https://rubygems.pkg.github.com/${OWNER} *.gem
         env:
           OWNER: Drieam
+
+  rubygems:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+      - name: Replace version by tag value
+        run: sed -i "s/\"[0-9]\.[0-9]\..*\"/\"${GITHUB_REF##*/}\"/" lib/appsignal/sourcemap/version.rb
+      - name: Set allowed_push_host to rubygems
+        run: sed -i "s#https://rubygems.pkg.github.com/Drieam#https://rubygems.org#" appsignal-sourcemap.gemspec
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build *.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
