@@ -1,5 +1,13 @@
 name: linters
-on: push
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   standardrb:
     strategy:
