@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 6.1", "< 9.0"
   spec.add_dependency "appsignal", "< 5.0"
-  spec.add_dependency "parallel", "~> 1.0"
+  spec.add_dependency "parallel", ">= 1", "< 3"
 
   spec.add_development_dependency "standard"
   spec.metadata["rubygems_mfa_required"] = "true"
