@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*", "README.md"]
 
   spec.add_dependency "rails", ">= 6.1", "< 9.0"
-  spec.add_dependency "appsignal", "< 5.0"
+  spec.add_dependency "appsignal", "< 6.0"
   spec.add_dependency "parallel", "~> 1.0"
 
   spec.add_development_dependency "standard"
