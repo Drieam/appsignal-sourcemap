@@ -1,4 +1,8 @@
 # Appsignal Sourcemaps
+
+> [!WARNING]
+> This repository is no longer maintained. It will not receive updates, bug fixes or security patches. Issues and pull requests will not be addressed.
+
 This ruby gem uploads (private) sourcemaps to Appsignal using the [Sourcemaps API](https://docs.appsignal.com/api/sourcemaps.html).
 
 ## Installation
